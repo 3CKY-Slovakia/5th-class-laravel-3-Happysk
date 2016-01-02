@@ -30,7 +30,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('guest', ['except' => 'getLogout']);
+        $this->middleware('guest', ['except' => ['getLogout', 'showBloggers']]);
     }
 
     /**
@@ -61,5 +61,11 @@ class AuthController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+	protected function showBloggers()
+    {
+        $users = User::all();
+	    return view('auth.bloggers', compact('users'));
     }
 }

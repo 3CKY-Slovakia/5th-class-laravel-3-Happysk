@@ -5,35 +5,35 @@
     <div id="blog-filters" class="cbp-l-filters-alignCenter normal type2">
 
         <!-- Filter -->
-        <div data-filter="*" class="cbp-filter-item-active cbp-filter-item">
+        <a data-filter="*" class="cbp-filter-item-active cbp-filter-item">
             All
             <!-- Filter Counter -->
             <div class="cbp-filter-counter"></div>
-        </div>
+        </a>
         <!-- Filter -->
-        <div data-filter=".graphic" class="cbp-filter-item">
+        <a data-filter=".graphic" class="cbp-filter-item">
             Graphic
             <!-- Filter Counter -->
             <div class="cbp-filter-counter"></div>
-        </div>
+        </a>
         <!-- Filter -->
-        <div data-filter=".design" class="cbp-filter-item">
+        <a data-filter=".design" class="cbp-filter-item">
             Design
             <!-- Filter Counter -->
             <div class="cbp-filter-counter"></div>
-        </div>
+        </a>
         <!-- Filter -->
-        <div data-filter=".photography" class="cbp-filter-item">
+        <a data-filter=".photography" class="cbp-filter-item">
             Photography
             <!-- Filter Counter -->
             <div class="cbp-filter-counter"></div>
-        </div>
+        </a>
         <!-- Filter -->
-        <div data-filter=".web" class="cbp-filter-item">
+        <a data-filter=".web" class="cbp-filter-item">
             Web
             <!-- Filter Counter -->
             <div class="cbp-filter-counter"></div>
-        </div>
+        </a>
 
     </div>
     <!-- End Filters -->
@@ -42,14 +42,19 @@
     <!-- Portfolio Items -->
     <div id="blog-items" class="fullwidth">
         @foreach($articles as $article)
-            <!-- Item -->
-            <div class="cbp-item item design photography">
-                <!-- Item Image -->
+                <!-- Item -->
+        <div class="cbp-item
+                    item
+            @foreach($article->tags as $tag)
+            {{strtolower($tag->name)}}
+            @endforeach
+            ">
+            <!-- Item Image -->
                 <div class="item-top">
                     <!-- Post Link -->
                     <a href="{{ url('article/show/'.$article->id) }}" class="ex-link item_image">
                         <!-- Image Src -->
-                        <img src="../images/portfolio/masonry/01.jpg" alt="Crexis">
+                        <img src="../images/portfolio/masonry/{{rand(1,20)}}.jpg" alt="Crexis">
                     </a>
                     <!-- Icon -->
                     <a href="#" class="item_button first">
@@ -76,7 +81,7 @@
                     </p>
                     <!-- Description -->
                     <p class="description">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.
+	                    {{substr($article->description, 0, 150)}}
                     </p>
                 </div>
                 <!-- End Center Details Div -->
@@ -87,7 +92,7 @@
                     <img src="../images/user_01.jpg" alt="user">
                     <p>
                         {{ $article->user->name }}
-                        <span>@WebDesign</span>
+                        @include('sections.tags')
                     </p>
                 </a>
             </div>

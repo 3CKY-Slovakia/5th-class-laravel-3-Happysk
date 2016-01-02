@@ -29,7 +29,7 @@
                     </li>
 
                     <li>
-                        <a href="#">Bloggers</a>
+                        <a href="{{ route('bloggers') }}">Bloggers</a>
                     </li>
 
                     <li>
@@ -71,7 +71,7 @@
                             <li class="ml-20 mt-15 mr-20 mb-15 raleway mini-text gray">
                                 <form method="post" class="search-form">
 
-                                    <input type="text" name="search" id="search" class="transparent uppercase" placeholder="Search...">
+                                    <input type="text" name="search" id="search-input" class="transparent uppercase" placeholder="Search..." onkeydown="down()" onkeyup="up()">
                                     <button type="submit">
                                         <i class="fa fa-search"></i>
                                     </button>

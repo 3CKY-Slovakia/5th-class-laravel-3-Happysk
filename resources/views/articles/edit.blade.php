@@ -32,7 +32,16 @@
                             </div>
 
                             <textarea class="summernote" name="content">{{ $article->content }}</textarea>
+	                        <div class="form-group">
+		                        @foreach($tags as $tag)
+			                        <label class="checkbox-inline">
+				                        <input type="checkbox" name="tags[]" value="{{$tag->id}}" }}>
+				                        {{$tag->name}}
+			                        </label>
 
+		                        @endforeach
+
+	                        </div>
                             <div class="form-group">
                                 <div class="text-center">
                                     <button type="submit" class="btn btn-primary">

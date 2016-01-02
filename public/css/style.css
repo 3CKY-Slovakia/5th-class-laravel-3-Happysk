@@ -8340,7 +8340,14 @@
     padding: 60px 0 60px 0;
 }
 
+#add-comment {
+	margin-top: 10px;
+	float: right;
+}
 
+#delete-butt {
+	margin-right: 10px;
+}
 
 
 

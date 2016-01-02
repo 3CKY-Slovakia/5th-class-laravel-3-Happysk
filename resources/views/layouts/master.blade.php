@@ -51,15 +51,26 @@
 <!-- Body Start -->
 <body class="parallax">
 
+
+	@if (count($errors) > 0)
+		<ul class="alert alert-danger">
+			@foreach ($errors->all() as $error)
+				<li>{{ $error }}</li>
+			@endforeach
+		</ul>
+	@endif
+
     @include('sections.page-loader')
 
     @include('sections.page-top')
 
     @include('sections.navigation')
 
-    @include('sections.header', ['image' => '49'])
+	@include('sections.header', ['image' => '49'])
 
-    <section id="content">
+	@include('flash::message')
+
+	<section id="content">
         @yield('content')
     </section>
 

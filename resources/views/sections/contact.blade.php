@@ -148,49 +148,43 @@
             <!-- Contact Form -->
             <div class="contact_form f-right">
                 <!-- Form -->
-                <form id="contact_form" name="cform" class="clearfix form dark_form" method="post" action="php/mail.php">
-
-                    <!-- Name -->
-                    <input type="text" name="name" id="name" required placeholder="Name">
-
-                    <!-- Email -->
-                    <input type="email" name="email" id="email" required placeholder="E-Mail">
-
-                    <!-- Subject -->
-                    <input type="text" name="subject" id="subject" required placeholder="Subject">
-
-                    <!-- Message -->
-                    <textarea name="message" id="message" required placeholder="Message"></textarea>
-
-                    <!-- Verify -->
-                    <input type="text" name="verify" id="verify" required placeholder="">
-
-                    <!-- Reset Button -->
-                    <button type="reset" id="clear" name="clear">Clear</button>
-                    <!-- End Reset Button -->
-
-                    <!-- Send Button -->
-                    <button type="submit" id="submit" name="submit" class="colored-bg">Send</button>
-                    <!-- End Send Button -->
-
-                    <!-- Error Message -->
-                    <div class="error_message">
-                        <p class="t-left no-margin">
-                            <!-- Error Message Icon -->
-                            <i class="fa fa-warning"></i>
-                            Validation error occured. Please enter the fields and submit it again.
-                        </p>
-                    </div>
-                    <!-- Submit Message -->
-                    <div class="submit_message">
-                        <p class="t-left no-margin">
-                            <!-- Error Message Icon -->
-                            <i class="fa fa-check"></i>
-                            Thank You ! Your email has been delivered.
-                        </p>
-                    </div>
-                </form>
-                <!-- End Form -->
+	            <form action="/contact" method="post">
+		            <input type="hidden" name="_token" value="{!! csrf_token() !!}">
+		            <div class="row control-group">
+			            <div class="form-group col-xs-12">
+				            <label for="name">Name</label>
+				            <input type="text" class="form-control" id="name" name="name"
+				                   value="{{ old('name') }}">
+			            </div>
+		            </div>
+		            <div class="row control-group">
+			            <div class="form-group col-xs-12">
+				            <label for="email">Email Address</label>
+				            <input type="email" class="form-control" id="email" name="email"
+				                   value="{{ old('email') }}">
+			            </div>
+		            </div>
+		            <div class="row control-group">
+			            <div class="form-group col-xs-12 controls">
+				            <label for="subject">Subject</label>
+				            <input type="text" class="form-control" id="suject" name="subject"
+				                   value="{{ old('subject') }}">
+			            </div>
+		            </div>
+		            <div class="row control-group">
+			            <div class="form-group col-xs-12 controls">
+				            <label for="message">Message</label>
+              <textarea rows="5" class="form-control" id="message"
+                        name="message">{{ old('message') }}</textarea>
+			            </div>
+		            </div>
+		            <br>
+		            <div class="row">
+			            <div class="form-group col-xs-12">
+				            <button type="submit" class="btn btn-default">Send</button>
+			            </div>
+		            </div>
+	            </form>                <!-- End Form -->
             </div>
             <!-- End Contact Form -->
         </div>

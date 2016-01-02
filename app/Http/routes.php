@@ -14,16 +14,15 @@
 /**
  * HOME
  */
-Route::get('/', function () {
-    return view('welcome', [
-        'articles' => \App\Article::orderBy('created_at', 'desc')->get()
-    ]);
-});
-Route::get('home', function () {
-    return view('welcome', [
-        'articles' => \App\Article::orderBy('created_at', 'desc')->get()
-    ]);
-});
+use App\Article;
+use App\Tag;
+
+/**
+ * HomePage
+ **/
+Route::get('home', 'ArticlesController@index');
+Route::get('/', 'ArticlesController@index');
+
 
 
 /**
@@ -32,8 +31,11 @@ Route::get('home', function () {
 Route::group(['prefix' => 'blog-post'], function () {
     Route::get('/{id}', function () {
         return view('blog-post');
-    });
-});
+        });
+	});
+Route::get('bloggers', [
+    'as' => 'bloggers',
+    'uses' => 'Auth\AuthController@showBloggers'] );
 
 /**
  * AUTH
@@ -63,10 +65,25 @@ Route::group(['prefix' => 'auth'], function () {
  */
 Route::group(['prefix' => 'article'], function () {
     Route::get('/', 'ArticlesController@index');
-    Route::get('show/{id}', 'ArticlesController@show');
-    Route::get('create', 'ArticlesController@create');
+    Route::get('show/{id}', [
+	    'as' => 'article.show',
+	    'uses' => 'ArticlesController@show'
+    ]);
+	Route::get('create', 'ArticlesController@create');
     Route::get('edit/{id}', 'ArticlesController@edit');
+	Route::get('delete/{id}', 'ArticlesController@destroy');
 
     Route::post('store', 'ArticlesController@store');
     Route::post('update/{id}', 'ArticlesController@update');
 });
+ // Comments
+	Route::post('comment/store',
+		['as' => 'comment.store',
+		 'uses'=>'CommentsController@store']);
+
+// Contact
+Route::post('contact', 'ContactController@store');
+
+
+
+

@@ -45,10 +45,16 @@ class User extends Model implements AuthenticatableContract,
      */
     public function articles()
     {
-        return $this->hasMany('App\Article');
+        return $this->hasMany('App\Article')->latest('created_at');
     }
 
-    public function isOwner($articleID){
+    public function isOwner($articleID)
+    {
         return !empty(Auth::user()->articles()->find($articleID));
     }
+
+	public function numberOfArticles()
+	{
+		return count(Auth::user()->articles);
+	}
 }
